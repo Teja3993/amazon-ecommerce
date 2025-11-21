@@ -1,3 +1,4 @@
+import Registration from "./pages/Registration";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductListing from "./pages/ProductListing";
@@ -8,8 +9,10 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        
         <Route path="/" element={<ProductListing />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/register" element={<Registration />} />
       </Routes>
     </Router>
   );
