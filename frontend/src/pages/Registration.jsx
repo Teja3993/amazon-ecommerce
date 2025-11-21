@@ -3,10 +3,35 @@ import { useState } from "react";
 function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    alert("Registration submitted! (Backend coming next)");
+    setLoading(true);
+    setMsg("");
+
+    try {
+      const res = await fetch("http://localhost:4000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMsg(data.message || "Registration failed");
+      } else {
+        setMsg("Registration successful!");
+        setEmail("");
+        setPassword("");
+      }
+    } catch (err) {
+      setMsg("Server error, try again later");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -22,6 +47,20 @@ function Registration() {
     >
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Register</h2>
 
+      {msg && (
+        <div
+          style={{
+            background: "#eee",
+            padding: "10px",
+            borderRadius: "6px",
+            marginBottom: "10px",
+            textAlign: "center",
+          }}
+        >
+          {msg}
+        </div>
+      )}
+
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", gap: "15px" }}
@@ -32,7 +71,11 @@ function Registration() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "12px", borderRadius: "6px", border: "1px solid #ccc" }}
+          style={{
+            padding: "12px",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
         />
 
         <input
@@ -41,21 +84,26 @@ function Registration() {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "12px", borderRadius: "6px", border: "1px solid #ccc" }}
+          style={{
+            padding: "12px",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
         />
 
         <button
           type="submit"
+          disabled={loading}
           style={{
             padding: "12px",
             borderRadius: "6px",
-            background: "#111",
+            background: loading ? "#555" : "#111",
             color: "white",
             border: "none",
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
           }}
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
