@@ -2,13 +2,18 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav style={{
-      padding: "15px",
-      background: "#111",
-      color: "#fff",
-      display: "flex",
-      justifyContent: "space-between"
-    }}>
+    <nav
+  style={{
+    padding: "15px 25px",
+    background: "#232f3e",
+    color: "#fff",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+  }}
+>
+
       <Link to="/" style={{ color: "white", textDecoration: "none" }}>
         Amazon
       </Link>
