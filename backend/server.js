@@ -27,6 +27,11 @@ app.post("/api/register", (req, res) => {
   res.json({ message: "Registered successfully", user: { email } });
 });
 
-app.listen(4000, () => {
-  console.log("Backend running on http://localhost:4000");
-});
+if (require.main === module) {
+  app.listen(4000, () => {
+    console.log("Backend running on http://localhost:4000");
+  });
+}
+
+module.exports = app;
+
