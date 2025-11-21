@@ -23,6 +23,9 @@ function Navbar() {
       <Link to="/register" style={{ color: "white", marginRight: "15px" }}>
   Register
 </Link>
+<Link to="/login" style={{ color: "white", marginRight: "15px" }}>
+  Login
+</Link>
 
     </nav>
   );
