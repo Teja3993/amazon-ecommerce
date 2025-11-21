@@ -8,7 +8,15 @@ function ProductDetails() {
   if (!product) return <h2 style={{ padding: "20px" }}>Product not found</h2>;
 
   return (
-    <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
+    <div style={{
+  padding: "20px",
+  maxWidth: "800px",
+  margin: "40px auto",
+  background: "white",
+  borderRadius: "10px",
+  boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
+}}>
+
       <div
         style={{
           display: "flex",
