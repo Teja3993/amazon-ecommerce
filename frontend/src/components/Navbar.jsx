@@ -20,6 +20,10 @@ function Navbar() {
       <div>
         <Link to="/" style={{ color: "white", marginRight: "15px" }}>Products</Link>
       </div>
+      <Link to="/register" style={{ color: "white", marginRight: "15px" }}>
+  Register
+</Link>
+
     </nav>
   );
 }
