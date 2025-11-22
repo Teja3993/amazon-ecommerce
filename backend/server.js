@@ -6,6 +6,35 @@ app.use(cors());
 app.use(express.json());
 
 let users = []; // simple in-memory store
+let orders = [];
+app.post("/api/orders", (req, res) => {
+  const { name, address, phone, payment, items, total } = req.body;
+
+  if (!name || !address || !phone || !payment || !items || !total) {
+    return res.status(400).json({ message: "Missing fields" });
+  }
+
+  const orderId = "ORD-" + Date.now();
+
+  const order = {
+    orderId,
+    name,
+    address,
+    phone,
+    payment,
+    items,
+    total,
+    date: new Date()
+  };
+
+  orders.push(order);
+
+  res.json({
+    message: "Order placed successfully",
+    orderId,
+    order,
+  });
+});
 
 // Registration API
 app.post("/api/register", (req, res) => {
