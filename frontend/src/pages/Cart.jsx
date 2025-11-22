@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+// AMZ-10 Cart Feature completed: UI + quantity + remove + add-to-cart + checkout redirect
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart } = useCart();
