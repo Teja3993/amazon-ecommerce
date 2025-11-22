@@ -7,6 +7,7 @@ import ProductDetails from "./pages/ProductDetails";
 
 import ApiTester from "./pages/ApiTester";
 import Cart from "./pages/Cart";
+import Home from "./pages/Home";   // NEW
 
 
 function App() {
@@ -14,13 +15,16 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
-<Route path="/test-api" element={<ApiTester />} />
-<Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Home />} />
 
-        <Route path="/" element={<ProductListing />} />
+        <Route path="/products" element={<ProductListing />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
+
+        <Route path="/test-api" element={<ApiTester />} />
       </Routes>
     </Router>
   );

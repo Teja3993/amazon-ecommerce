@@ -1,22 +1,25 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
+import { useCart } from "../context/CartContext";
 
 function ProductDetails() {
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id));
+  const { addToCart } = useCart();
 
   if (!product) return <h2 style={{ padding: "20px" }}>Product not found</h2>;
 
   return (
-    <div style={{
-  padding: "20px",
-  maxWidth: "800px",
-  margin: "40px auto",
-  background: "white",
-  borderRadius: "10px",
-  boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
-}}>
-
+    <div
+      style={{
+        padding: "20px",
+        maxWidth: "800px",
+        margin: "40px auto",
+        background: "white",
+        borderRadius: "10px",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -43,17 +46,33 @@ function ProductDetails() {
             {product.description}
           </p>
 
+          {/* ADD TO CART BUTTON (FIXED) */}
           <button
+            onClick={() => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    alert("Please login first to add this item.");
+    return;
+  }
+
+  addToCart({
+    id: product.id,
+    title: product.name,
+    price: product.price,
+    image: product.image,
+  });
+}}
+
             style={{
-              padding: "10px 15px",
               marginTop: "20px",
+              padding: "12px 15px",
               background: "#111",
               color: "white",
               border: "none",
-              borderRadius: "5px",
+              borderRadius: "6px",
               cursor: "pointer",
             }}
-            onClick={() => alert("Add to cart (implemented later)")}
           >
             Add to Cart
           </button>
