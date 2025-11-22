@@ -9,6 +9,9 @@ import Checkout from "./pages/Checkout";
 import ApiTester from "./pages/ApiTester";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";   // NEW
+import OrderSuccess from "./pages/OrderSuccess";
+
+
 
 
 function App() {
@@ -25,7 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
 <Route path="/checkout" element={<Checkout />} />
-
+<Route path="/order-success/:id" element={<OrderSuccess />} />
         <Route path="/test-api" element={<ApiTester />} />
       </Routes>
     </Router>

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function Checkout() {
   const { cart } = useCart();
+
   const [details, setDetails] = useState({
     name: "",
     address: "",
@@ -15,11 +16,50 @@ function Checkout() {
     0
   );
 
+  // -----------------------
+  // AMZ-29: PLACE ORDER API CALL (No redirect)
+  // -----------------------
+  const placeOrder = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      alert("Please login before placing an order.");
+      return;
+    }
+
+    if (!details.name || !details.address || !details.phone) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:4000/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...details,
+          items: cart,
+          total,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // AMZ-29 ONLY → NO redirect
+        alert(`Order placed successfully! Order ID: ${data.orderId}`);
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error placing order.");
+    }
+  };
+
   return (
     <div style={{ maxWidth: "900px", margin: "40px auto", padding: "20px" }}>
       <h2>Checkout</h2>
 
-      {/* FORM */}
       <div
         style={{
           background: "white",
@@ -61,7 +101,6 @@ function Checkout() {
         />
 
         <h3>Payment Method</h3>
-
         <select
           value={details.payment}
           onChange={(e) =>
@@ -75,7 +114,6 @@ function Checkout() {
         </select>
       </div>
 
-      {/* ORDER SUMMARY */}
       <div
         style={{
           background: "white",
@@ -108,11 +146,8 @@ function Checkout() {
         </h2>
       </div>
 
-      {/* PROCEED BUTTON */}
       <button
-        onClick={() =>
-          alert("Order functionality will be implemented next (AMZ-29)")
-        }
+        onClick={placeOrder}
         style={{
           marginTop: "20px",
           padding: "15px",
