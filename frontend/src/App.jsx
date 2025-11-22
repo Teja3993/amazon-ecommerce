@@ -29,6 +29,7 @@ function App() {
         <Route path="/register" element={<Registration />} />
 <Route path="/checkout" element={<Checkout />} />
 <Route path="/order-success/:id" element={<OrderSuccess />} />
+{/* added order success code for amz-30 */}
         <Route path="/test-api" element={<ApiTester />} />
       </Routes>
     </Router>
