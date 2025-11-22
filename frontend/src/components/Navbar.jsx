@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 function Navbar() {
   const navigate = useNavigate();
 
   // Get user from browser storage
   const user = JSON.parse(localStorage.getItem("user"));
+const { cart } = useCart();
 
   function handleLogout() {
     localStorage.removeItem("user");
@@ -39,8 +41,9 @@ function Navbar() {
           Products
         </Link>
 <Link to="/cart" style={{ color: "white", marginRight: "20px" }}>
-  Cart ({JSON.parse(localStorage.getItem("cart"))?.length || 0})
+  Cart ({cart.length})
 </Link>
+
 
         <Link to="/test-api" style={{ color: "white", marginRight: "20px" }}>
           API Tester
