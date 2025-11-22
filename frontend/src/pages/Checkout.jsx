@@ -19,6 +19,8 @@ function Checkout() {
   // -----------------------
   // AMZ-29: PLACE ORDER API CALL (No redirect)
   // -----------------------
+  // AMZ-11 Checkout & Order Placement Story Completed
+
   const placeOrder = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {

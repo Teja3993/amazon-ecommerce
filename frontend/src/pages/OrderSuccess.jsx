@@ -30,5 +30,6 @@ function OrderSuccess() {
     </div>
   );
 }
+// AMZ-11 Checkout & Order Placement Story Completed
 
 export default OrderSuccess;
