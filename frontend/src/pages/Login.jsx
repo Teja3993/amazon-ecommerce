@@ -1,12 +1,44 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    alert("Login clicked (API coming next)");
+    setLoading(true);
+    setMsg("");
+
+    try {
+      const res = await fetch("http://localhost:4000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMsg("Login successful!");
+
+        // Save in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Redirect after 1 sec
+        setTimeout(() => navigate("/"), 1000);
+      } else {
+        setMsg(data.message || "Login failed");
+      }
+    } catch (error) {
+      setMsg("Server error");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -21,6 +53,20 @@ function Login() {
       }}
     >
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login</h2>
+
+      {msg && (
+        <div
+          style={{
+            background: "#eee",
+            padding: "10px",
+            textAlign: "center",
+            borderRadius: "6px",
+            marginBottom: "10px",
+          }}
+        >
+          {msg}
+        </div>
+      )}
 
       <form
         onSubmit={handleSubmit}
@@ -54,16 +100,17 @@ function Login() {
 
         <button
           type="submit"
+          disabled={loading}
           style={{
             padding: "12px",
             borderRadius: "6px",
-            background: "#111",
+            background: loading ? "#666" : "#111",
             color: "white",
             border: "none",
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
           }}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
