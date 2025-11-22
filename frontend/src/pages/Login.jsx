@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// AMZ-6 Login feature completed (logic + UI + API integration)
 
 function Login() {
   const [email, setEmail] = useState("");
