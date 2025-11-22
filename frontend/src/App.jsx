@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
+import Checkout from "./pages/Checkout";
 
 import ApiTester from "./pages/ApiTester";
 import Cart from "./pages/Cart";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
+<Route path="/checkout" element={<Checkout />} />
 
         <Route path="/test-api" element={<ApiTester />} />
       </Routes>
