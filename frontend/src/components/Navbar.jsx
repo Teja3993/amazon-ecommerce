@@ -38,6 +38,9 @@ function Navbar() {
         <Link to="/products" style={{ color: "white", marginRight: "20px" }}>
           Products
         </Link>
+<Link to="/cart" style={{ color: "white", marginRight: "20px" }}>
+  Cart ({JSON.parse(localStorage.getItem("cart"))?.length || 0})
+</Link>
 
         <Link to="/test-api" style={{ color: "white", marginRight: "20px" }}>
           API Tester

@@ -6,6 +6,7 @@ import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 
 import ApiTester from "./pages/ApiTester";
+import Cart from "./pages/Cart";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
 <Route path="/test-api" element={<ApiTester />} />
+<Route path="/cart" element={<Cart />} />
 
         <Route path="/" element={<ProductListing />} />
         <Route path="/product/:id" element={<ProductDetails />} />
