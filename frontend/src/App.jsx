@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 
+import ApiTester from "./pages/ApiTester";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
+<Route path="/test-api" element={<ApiTester />} />
 
         <Route path="/" element={<ProductListing />} />
         <Route path="/product/:id" element={<ProductDetails />} />
