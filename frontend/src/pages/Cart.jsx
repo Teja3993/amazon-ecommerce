@@ -1,4 +1,5 @@
 import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart } = useCart();
@@ -53,9 +54,7 @@ function Cart() {
             {/* Quantity Controls */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <button
-                onClick={() =>
-                  updateQuantity(item.id, item.quantity - 1)
-                }
+                onClick={() => updateQuantity(item.id, item.quantity - 1)}
                 style={{
                   padding: "5px 10px",
                   background: "#ddd",
@@ -69,9 +68,7 @@ function Cart() {
               <span style={{ fontSize: "18px" }}>{item.quantity}</span>
 
               <button
-                onClick={() =>
-                  updateQuantity(item.id, item.quantity + 1)
-                }
+                onClick={() => updateQuantity(item.id, item.quantity + 1)}
                 style={{
                   padding: "5px 10px",
                   background: "#ddd",
@@ -114,23 +111,24 @@ function Cart() {
         Total: ₹{total.toFixed(2)}
       </div>
 
-      {/* Checkout Button */}
-      <button
-        style={{
-          marginTop: "20px",
-          padding: "15px",
-          width: "100%",
-          background: "#111",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          fontSize: "18px",
-          cursor: "pointer",
-        }}
-        onClick={() => alert("Checkout will be done in AMZ-11")}
-      >
-        Proceed to Checkout →
-      </button>
+      {/* CHECKOUT BUTTON */}
+      <Link to="/checkout">
+        <button
+          style={{
+            marginTop: "20px",
+            padding: "15px",
+            width: "100%",
+            background: "#111",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            fontSize: "18px",
+            cursor: "pointer",
+          }}
+        >
+          Proceed to Checkout →
+        </button>
+      </Link>
     </div>
   );
 }
